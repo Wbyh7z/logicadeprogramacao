@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Lógica de Programação em JavaScript (Demo Visual)</title>
+  <style>
+    :root{
+      --bg:#0b1020;
+      --card:#121b33;
+      --text:#eaf1ff;
+      --muted:#9fb0cc;
+      --accent:#3498db;
+      --ok:#2ecc71;
+      --warn:#f39c12;
+      --err:#e74c3c;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:linear-gradient(180deg,#091226,#0b1020 35%);
+      color:var(--text);
+    }
+    .wrap{max-width:1100px; margin:40px auto; padding:0 16px}
+    header{margin-bottom:24px}
+    h1{font-size:28px; margin:0 0 8px}
+    p.lead{color:var(--muted); margin:0}
+    .grid{
+      display:grid; gap:16px;
+      grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+    }
+    .card{
+      background:var(--card); border:1px solid rgba(255,255,255,.06);
+      border-radius:16px; padding:16px; box-shadow:0 10px 24px rgba(0,0,0,.25);
+    }
+    .card h2{font-size:18px; margin:0 0 8px}
+    .card p{color:var(--muted); margin:0 0 12px}
+    .row{display:flex; gap:8px; flex-wrap:wrap; margin:8px 0 12px}
+    input, button{
+      height:40px; border-radius:10px; border:1px solid rgba(255,255,255,.08);
+      background:#0e1733; color:var(--text); padding:0 12px; outline:none;
+    }
+    input{flex:1; min-width:120px}
+    button{
+      background:var(--accent); border:none; cursor:pointer; font-weight:600;
+      transition:transform .06s ease, filter .15s ease;
+    }
+    button:hover{filter:brightness(1.05)}
+    button:active{transform:translateY(1px)}
+    pre{
+      background:#0b142b; padding:12px; border-radius:12px; overflow:auto;
+      font-family:var(--mono); font-size:13px; line-height:1.45; margin:0;
+      border:1px solid rgba(255,255,255,.06);
+    }
+    code.tag{color:#7cc6ff}
+    .hint{font-size:12px; color:var(--muted); margin-top:8px}
+    footer{margin:28px 0 12px; color:var(--muted); font-size:13px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Lógica de Programação com JavaScript — versão visual (HTML)</h1>
+      <p class="lead">Teste variáveis, condicionais, laços, funções, arrays/objetos e pequenos algoritmos — tudo exibido na tela.</p>
+    </header>
+
+    <div class="grid">
+      <!-- 1. Variáveis -->
+      <section class="card">
+        <h2>1) Variáveis</h2>
+        <p>Guarde e atualize valores (ex.: nome e idade).</p>
+        <div class="row">
+          <input id="varNome" placeholder="Nome (ex.: Ana)" />
+          <input id="varIdade" type="number" placeholder="Idade (ex.: 19)" />
+          <button onclick="demoVariaveis()">Executar</button>
+        </div>
+        <pre id="outVariaveis">// saída aparecerá aqui</pre>
+        <div class="hint">Dica: use <strong>let</strong> para valores que mudam e <strong>const</strong> para constantes.</div>
+      </section>
+
+      <!-- 2. Condicionais -->
+      <section class="card">
+        <h2>2) Condicionais (if/else)</h2>
+        <p>Decida o fluxo com base em condições (ex.: maior de idade).</p>
+        <div class="row">
+          <input id="condIdade" type="number" placeholder="Idade (ex.: 18)" />
+          <button onclick="demoCondicionais()">Verificar</button>
+        </div>
+        <pre id="outCond">// saída aparecerá aqui</pre>
+        <div class="hint">Regra de ouro: condições claras evitam comportamentos inesperados.</div>
+      </section>
+
+      <!-- 3. Laços -->
+      <section class="card">
+        <h2>3) Laços de repetição</h2>
+        <p>Repita tarefas sem duplicar código (contar de 1 a N).</p>
+        <div class="row">
+          <input id="loopN" type="number" placeholder="Contar até... (ex.: 5)" />
+          <button onclick="demoLoops()">Contar</button>
+        </div>
+        <pre id="outLoop">// saída aparecerá aqui</pre>
+        <div class="hint">Use <strong>for</strong> quando souber o limite e <strong>while</strong> para repetir até uma condição mudar.</div>
+      </section>
+
+      <!-- 4. Funções -->
+      <section class="card">
+        <h2>4) Funções</h2>
+        <p>Encapsule uma tarefa e reutilize (ex.: somar dois números).</p>
+        <div class="row">
+          <input id="funA" type="number" placeholder="A (ex.: 3)" />
+          <input id="funB" type="number" placeholder="B (ex.: 4)" />
+          <button onclick="demoFuncoes()">Somar</button>
+        </div>
+        <pre id="outFunc">// saída aparecerá aqui</pre>
+        <div class="hint">Funções claras e pequenas deixam o código mais legível.</div>
+      </section>
+
+      <!-- 5. Arrays -->
+      <section class="card">
+        <h2>5) Arrays (listas)</h2>
+        <p>Armazene e percorra coleções (ex.: frutas).</p>
+        <div class="row">
+          <input id="arrInput" placeholder="Lista separada por vírgula (maçã,banana,uva)" />
+          <button onclick="demoArrays()">Processar</button>
+        </div>
+        <pre id="outArray">// saída aparecerá aqui</pre>
+        <div class="hint">Dica: <code class="tag">split(',')</code>, <code class="tag">map</code>, <code class="tag">filter</code> e <code class="tag">reduce</code> são poderosos.</div>
+      </section>
+
+      <!-- 6. Objetos -->
+      <section class="card">
+        <h2>6) Objetos</h2>
+        <p>Agrupe dados relacionados (ex.: ficha de usuário).</p>
+        <div class="row">
+          <input id="objNome" placeholder="Nome (ex.: Ana)" />
+          <input id="objIdade" type="number" placeholder="Idade (ex.: 25)" />
+          <input id="objProf" placeholder="Profissão (ex.: Dev)" />
+          <button onclick="demoObjetos()">Criar objeto</button>
+        </div>
+        <pre id="outObj">// saída aparecerá aqui</pre>
+        <div class="hint">Acesse com <code class="tag">obj.campo</code> ou <code class="tag">obj['campo']</code>.</div>
+      </section>
+
+      <!-- 7. Pequenos algoritmos -->
+      <section class="card">
+        <h2>7) Pequenos algoritmos</h2>
+        <p>Média, palíndromo e FizzBuzz.</p>
+
+        <div class="row">
+          <input id="algNotas" placeholder="Notas (ex.: 7,8.5,6,10)" />
+          <button onclick="demoMedia()">Média</button>
+        </div>
+        <pre id="outMedia">// média aparecerá aqui</pre>
+
+        <div class="row">
+          <input id="algPalavra" placeholder="Texto p/ palíndromo (ex.: radar)" />
+          <button onclick="demoPalindromo()">Palíndromo?</button>
+        </div>
+        <pre id="outPal">// resultado aparecerá aqui</pre>
+
+        <div class="row">
+          <input id="algFizz" type="number" placeholder="Número (ex.: 16)" />
+          <button onclick="demoFizzBuzz()">FizzBuzz</button>
+        </div>
+        <pre id="outFizz">// sequência aparecerá aqui</pre>
+
+        <div class="hint">Algoritmo = sequência de passos para resolver um problema.</div>
+      </section>
+    </div>
+
+    <footer>
+      Frase final: “Programar não é decorar códigos, é aprender a pensar de forma lógica para resolver problemas.”
+    </footer>
+  </div>
+
+  <script>
+  // Utilidades
+  const $$ = (id) => document.getElementById(id);
+  const show = (id, text) => $$(id).textContent = text;
+
+  // 1) Variáveis
+  function demoVariaveis(){
+    let nome = $$("varNome").value.trim() || "Visitante";
+    let idade = Number($$("varIdade").value);
+    const valido = !Number.isNaN(idade) && idade > 0;
+
+    const tipoNome = typeof nome; // string
+    const tipoIdade = typeof idade; // number
+
+    let saida = `Nome: ${nome}\nTipo de nome: ${tipoNome}\n`;
+    if (valido){
+      saida += `Idade: ${idade}\nTipo de idade: ${tipoIdade}\n`;
+      idade = idade + 1; // atualiza
+      saida += `Idade no próximo ano: ${idade}`;
+    } else {
+      saida += "Idade inválida (informe um número maior que 0).";
+    }
+    show("outVariaveis", saida);
+  }
+
+  // 2) Condicionais
+  function demoCondicionais(){
+    const idade = Number($$("condIdade").value);
+    if (Number.isNaN(idade)){
+      show("outCond", "Informe uma idade válida.");
+      return;
+    }
+    let msg;
+    if (idade >= 18){
+      msg = "Maior de idade. Acesso permitido.";
+    } else {
+      msg = "Menor de idade. Acesso negado.";
+    }
+    const status = idade >= 18 ? "Aprovado no critério de idade." : "Reprovado no critério de idade.";
+    show("outCond", `${msg}\nTernário: ${status}`);
+  }
+
+  // 3) Laços
+  function demoLoops(){
+    const n = Math.max(1, Number($$("loopN").value) || 0);
+    let r = "Contagem com for:\n";
+    for (let i = 1; i <= n; i++) r += i + (i < n ? ", " : "");
+    r += "\n\nContagem com while:\n";
+    let c = 1;
+    while (c <= n){ r += c + (c < n ? ", " : ""); c++; }
+    show("outLoop", r);
+  }
+
+  // 4) Funções
+  function soma(a, b){ return a + b; }
+  function demoFuncoes(){
+    const a = Number($$("funA").value);
+    const b = Number($$("funB").value);
+    if (Number.isNaN(a) || Number.isNaN(b)){
+      show("outFunc", "Preencha A e B com números.");
+      return;
+    }
+    const total = soma(a, b);
+    const ehPar = (n) => n % 2 === 0;
+    show("outFunc", `soma(${a}, ${b}) = ${total}\nO resultado é ${ehPar(total) ? "par" : "ímpar"}.`);
+  }
+
+  // 5) Arrays
+  function demoArrays(){
+    const raw = $$("arrInput").value.trim() || "maçã, banana, uva";
+    const arr = raw.split(",").map(s => s.trim()).filter(Boolean);
+    const segunda = arr[1] ?? "(não existe)";
+    const hasUva = arr.map(x => x.toLowerCase()).includes("uva");
+
+    let r = `Array: [${arr.join(", ")}]\n`;
+    r += `Tamanho: ${arr.length}\n`;
+    r += `Elemento [1]: ${segunda}\n`;
+    r += `Contém "uva"? ${hasUva ? "sim" : "não"}\n`;
+    r += `Ordenado (alfabético): [${[...arr].sort().join(", ")}]`;
+    show("outArray", r);
+  }
+
+  // 6) Objetos
+  function demoObjetos(){
+    const nome = $$("objNome").value.trim() || "Sem nome";
+    const idade = Number($$("objIdade").value) || 0;
+    const prof = $$("objProf").value.trim() || "Sem profissão";
+
+    const pessoa = { nome, idade, profissao: prof };
+    const { nome: n, idade: i } = pessoa;
+
+    let r = "Objeto pessoa:\n" + JSON.stringify(pessoa, null, 2) + "\n";
+    r += `Acesso direto: pessoa.nome = ${pessoa.nome}\n`;
+    r += `Desestruturação: nome=${n}, idade=${i}`;
+    show("outObj", r);
+  }
+
+  // 7) Algoritmos
+  function media(notas){
+    if (!Array.isArray(notas) || notas.length === 0) return 0;
+    const soma = notas.reduce((acc,n) => acc + n, 0);
+    return soma / notas.length;
+  }
+  function demoMedia(){
+    const raw = $$("algNotas").value.trim() || "7, 8.5, 6, 10";
+    const nums = raw.split(",").map(s => Number(s.trim())).filter(n => !Number.isNaN(n));
+    const m = media(nums);
+    let status = "Reprovado";
+    if (m >= 9) status = "Aprovado com excelência";
+    else if (m >= 6) status = "Aprovado";
+    show("outMedia", `Notas: [${nums.join(", ")}]\nMédia: ${m.toFixed(2)}\nStatus: ${status}`);
+  }
+
+  function ehPalindromo(texto){
+    if (typeof texto !== "string") return false;
+    const limpo = texto.toLowerCase().replace(/[\W_]/g,"");
+    const invertido = [...limpo].reverse().join("");
+    return limpo && limpo === invertido;
+  }
+  function demoPalindromo(){
+    const t = $$("algPalavra").value || "radar";
+    show("outPal", `"${t}" é palíndromo? ${ehPalindromo(t) ? "Sim" : "Não"}`);
+  }
+
+  function demoFizzBuzz(){
+    const n = Math.max(1, Number($$("algFizz").value) || 16);
+    const out = [];
+    for (let i=1;i<=n;i++){
+      const fizz = i % 3 === 0, buzz = i % 5 === 0;
+      out.push(fizz && buzz ? "FizzBuzz" : fizz ? "Fizz" : buzz ? "Buzz" : String(i));
+    }
+    show("outFizz", out.join(", "));
+  }
+</script>
+</body>
+</html>
